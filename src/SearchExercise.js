@@ -10,8 +10,9 @@ const SearchExercise = () => {
 
   async function handleSearch() {
     try {
+      let name = exerciseName.toLowerCase();
       const response = await axios.get(
-        `https://exercisedb.p.rapidapi.com/exercises/name/${exerciseName}`,
+        `https://exercisedb.p.rapidapi.com/exercises/name/${name}`,
         {
           headers: {
             "x-rapidapi-key":
@@ -22,18 +23,23 @@ const SearchExercise = () => {
       );
 
       if (response.data.length === 0) {
-        alert("Exercise not found in ExerciseDB.");
+        setExerciseData({
+          name: exerciseName.toUpperCase(),
+          gifUrl: "",
+          description:
+            response.data[0]?.instructions || "No description available",
+        });
         return;
       }
 
-      const combinedData = {
-        name: exerciseName,
+      setExerciseData({
+        name: exerciseName.toUpperCase(),
         gifUrl: response.data[0]?.gifUrl || "",
         description:
           response.data[0]?.instructions || "No description available",
-      };
+      });
 
-      setExerciseData(combinedData);
+      console.log(exerciseData);
     } catch (error) {
       console.error("Error fetching exercise details:", error);
       alert("An error occurred while fetching exercise details.");
