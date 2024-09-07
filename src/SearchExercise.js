@@ -5,6 +5,8 @@ import { useState } from "react";
 const SearchExercise = () => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseData, setExerciseData] = useState(null);
+  const [exerciseTime, setExerciseTime] = useState("");
+  const [restTime, setRestTime] = useState("");
 
   async function handleSearch() {
     try {
@@ -38,6 +40,18 @@ const SearchExercise = () => {
     }
   }
 
+  const handleAddExercise = () => {
+    if (exerciseData && exerciseTime) {
+      console.log({
+        ...exerciseData,
+        exerciseTime: parseInt(exerciseTime),
+        restTime: parseInt(restTime) || 0,
+      });
+    }
+    setExerciseTime("");
+    setRestTime("");
+  };
+
   return (
     <div>
       <input
@@ -47,6 +61,19 @@ const SearchExercise = () => {
         placeholder="Search for an exercise..."
       />
       <button onClick={handleSearch}>Search</button>
+      <input
+        type="number"
+        value={exerciseTime}
+        onChange={(e) => setExerciseTime(e.target.value)}
+        placeholder="Time (seconds)"
+      />
+      <input
+        type="number"
+        value={restTime}
+        onChange={(e) => setRestTime(e.target.value)}
+        placeholder="Rest Time (seconds)"
+      />
+      <button onClick={handleAddExercise}>Add To Work Out</button>
 
       {exerciseData && (
         <div>
