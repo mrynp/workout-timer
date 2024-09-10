@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 
-const SearchExercise = () => {
+const SearchExercise = ({ onAddExercise }) => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseData, setExerciseData] = useState(null);
   const [exerciseTime, setExerciseTime] = useState("");
@@ -48,7 +48,7 @@ const SearchExercise = () => {
 
   const handleAddExercise = () => {
     if (exerciseData && exerciseTime) {
-      console.log({
+      onAddExercise({
         ...exerciseData,
         exerciseTime: parseInt(exerciseTime),
         restTime: parseInt(restTime) || 0,

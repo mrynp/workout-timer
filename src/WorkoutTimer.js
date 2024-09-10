@@ -1,7 +1,7 @@
 import React from "react";
 
-const WorkoutTimer = () => {
-  return <div>WorkoutTimer</div>;
-};
+function WorkoutTimer() {
+  return <div></div>;
+}
 
 export default WorkoutTimer;

@@ -1,14 +1,24 @@
 import React from "react";
-import SearchExercise from "./SearchExercise";
-import "./App.css";
+// import SearchExercise from "./SearchExercise";
+import WorkoutInput from "./WorkoutInput";
 
-const App = () => {
+import "./App.css";
+import { useState } from "react";
+
+function App() {
+  // const [workoutPlan, setWorkoutPlan] = useState([]);
+
+  // const addExerciseToWorkout = (exercise) => {
+  //   setWorkoutPlan((prevPlan) => [...prevPlan, exercise]);
+  // };
+
   return (
     <div className="App">
-      <h1>Search for exercise:</h1>
-      <SearchExercise />
+      <h1>Workout Timer App</h1>
+      <WorkoutInput />
+      {/* <SearchExercise onAddExercise={addExerciseToWorkout} /> */}
     </div>
   );
-};
+}
 
 export default App;
