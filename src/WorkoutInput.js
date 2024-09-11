@@ -21,19 +21,28 @@ const WorkoutInput = () => {
 
   return (
     <div>
-      <h2>Add Exercise</h2>
-      <input type="text" placeholder="Add an exercise..." />
-      <input type="number" placeholder="Time (seconds)" />
-      <button>Add Exercise</button>
-      <h2>Add Rest Time</h2>
-      <input type="number" placeholder="Time (seconds)" />
-      <button>Add Rest Time</button>
-
+      <div className="input-container">
+        <div>
+          <input
+            className="exercise-input"
+            type="text"
+            placeholder="Add an exercise..."
+          />
+          <input className="time-input" type="number" placeholder="Time (s)" />
+          <button>Add Exercise</button>
+        </div>
+        <div>
+          <input className="time-input" type="number" placeholder="Time (s)" />
+          <button>Add Rest</button>
+        </div>
+      </div>
       <ul>
         {workoutPlan.map((workout, workoutIndex) => {
           return (
             <li key={workoutIndex}>
               {workout.name}-{workout.time}s
+              <i class="fa-regular fa-pen-to-square"></i>
+              <i class="fa-regular fa-square-minus"></i>
             </li>
           );
         })}

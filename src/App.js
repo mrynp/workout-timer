@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Workout Timer App</h1>
+      <h1>Workout Timer</h1>
       <WorkoutInput />
       {/* <SearchExercise onAddExercise={addExerciseToWorkout} /> */}
     </div>
