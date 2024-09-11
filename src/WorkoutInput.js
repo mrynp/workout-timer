@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const WorkoutInput = ({ onAddExercise }) => {
+const WorkoutInput = ({ onAddExercise, workoutPlan }) => {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseTime, setExerciseTime] = useState("");
   const [restTime, setRestTime] = useState("");
@@ -8,9 +8,8 @@ const WorkoutInput = ({ onAddExercise }) => {
   const handleAddExercise = () => {
     if (exerciseName && exerciseTime) {
       onAddExercise({
-        type: "exercise",
         name: exerciseName,
-        time: parseInt(exerciseTime), // Default rest time to 0 if not specified
+        time: parseInt(exerciseTime),
       });
       setExerciseName("");
       setExerciseTime("");
@@ -18,12 +17,21 @@ const WorkoutInput = ({ onAddExercise }) => {
   };
 
   const handleAddRest = () => {
-    onAddExercise({
-      type: "rest",
-      name: "rest",
-      time: parseInt(restTime), // Default rest time to 0 if not specified
-    });
-    setRestTime("");
+    if (
+      workoutPlan.length > 0 &&
+      workoutPlan[workoutPlan.length - 1].name === "rest"
+    ) {
+      alert("Cannot add consecutive rest periods.");
+      return;
+    }
+
+    if (restTime) {
+      onAddExercise({
+        name: "rest",
+        time: parseInt(restTime),
+      });
+      setRestTime("");
+    }
   };
 
   return (
