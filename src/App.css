@@ -5,11 +5,12 @@
   font-family: "Montserrat", sans-serif;
 }
 
-.App {
+#root {
   display: flex;
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  text-align: center;
 }
 
 .App h1 {
@@ -48,4 +49,32 @@
   margin: 0 10px;
   height: 44px;
   font-size: 16px;
+}
+
+.workout-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgb(211, 211, 211);
+  justify-content: space-between;
+  margin: 9px 0;
+}
+
+.actions-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.actions-container button {
+  transition-duration: 200ms;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.actions-container button:hover {
+  opacity: 0.7;
 }

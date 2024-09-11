@@ -39,10 +39,18 @@ const WorkoutInput = () => {
       <ul>
         {workoutPlan.map((workout, workoutIndex) => {
           return (
-            <li key={workoutIndex}>
-              {workout.name}-{workout.time}s
-              <i class="fa-regular fa-pen-to-square"></i>
-              <i class="fa-regular fa-square-minus"></i>
+            <li className="workout-item" key={workoutIndex}>
+              <p>
+                {workout.time}s {workout.name}
+              </p>
+              <div className="actions-container">
+                <button>
+                  <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                </button>
+                <button>
+                  <i class="fa-regular fa-square-minus fa-lg"></i>
+                </button>
+              </div>
             </li>
           );
         })}
