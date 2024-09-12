@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 
-const WorkoutInput = ({ onAddExercise, workoutPlan }) => {
-  const [exerciseName, setExerciseName] = useState("");
-  const [exerciseTime, setExerciseTime] = useState("");
+const WorkoutInput = ({
+  onAddExercise,
+  workoutPlan,
+  exerciseName,
+  setExerciseName,
+  exerciseTime,
+  setExerciseTime,
+}) => {
   const [restTime, setRestTime] = useState("");
 
   const handleAddExercise = () => {
@@ -11,8 +16,6 @@ const WorkoutInput = ({ onAddExercise, workoutPlan }) => {
         name: exerciseName,
         time: parseInt(exerciseTime),
       });
-      setExerciseName("");
-      setExerciseTime("");
     }
   };
 
@@ -27,10 +30,9 @@ const WorkoutInput = ({ onAddExercise, workoutPlan }) => {
 
     if (restTime) {
       onAddExercise({
-        name: "rest",
+        name: "Rest",
         time: parseInt(restTime),
       });
-      setRestTime("");
     }
   };
 
@@ -52,7 +54,15 @@ const WorkoutInput = ({ onAddExercise, workoutPlan }) => {
             type="number"
             placeholder="Time (s)"
           />
-          <button onClick={handleAddExercise}>Add Exercise</button>
+          <button
+            onClick={() => {
+              handleAddExercise();
+              setExerciseName("");
+              setExerciseTime("");
+            }}
+          >
+            Add Exercise
+          </button>
         </div>
         <div>
           <input
@@ -62,7 +72,14 @@ const WorkoutInput = ({ onAddExercise, workoutPlan }) => {
             type="number"
             placeholder="Time (s)"
           />
-          <button onClick={handleAddRest}>Add Rest</button>
+          <button
+            onClick={() => {
+              handleAddRest();
+              setRestTime("");
+            }}
+          >
+            Add Rest
+          </button>
         </div>
       </div>
     </div>

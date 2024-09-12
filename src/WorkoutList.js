@@ -1,7 +1,7 @@
 import React from "react";
 
-const WorkoutList = (props) => {
-  const { workoutPlan } = props;
+const WorkoutList = ({ workoutPlan, handleDelete, handleEdit }) => {
+  // const { workoutPlan, handleDelete } = props;
   return (
     <div>
       <ul>
@@ -12,10 +12,18 @@ const WorkoutList = (props) => {
                 {workout.time}s {workout.name}
               </p>
               <div className="actions-container">
-                <button>
+                <button
+                  onClick={() => {
+                    handleEdit(workoutIndex);
+                  }}
+                >
                   <i class="fa-regular fa-pen-to-square fa-lg"></i>
                 </button>
-                <button>
+                <button
+                  onClick={() => {
+                    handleDelete(workoutIndex);
+                  }}
+                >
                   <i class="fa-regular fa-square-minus fa-lg"></i>
                 </button>
               </div>
