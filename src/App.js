@@ -47,6 +47,16 @@ function App() {
     setDraggedItemIndex(null);
   };
 
+  const handleDuplicate = (index) => {
+    const duplicateItem = { ...workoutPlan[index] };
+    const newWorkoutPlan = [
+      ...workoutPlan.slice(0, index + 1),
+      duplicateItem,
+      ...workoutPlan.slice(index + 1),
+    ];
+    setWorkoutPlan(newWorkoutPlan);
+  };
+
   return (
     <div className="App">
       <h1>Workout Timer</h1>
@@ -63,6 +73,7 @@ function App() {
         handleDelete={handleDelete}
         handleDrag={handleDrag}
         handleDrop={handleDrop}
+        handleDuplicate={handleDuplicate}
         workoutPlan={workoutPlan}
       />
     </div>

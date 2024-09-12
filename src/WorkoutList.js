@@ -6,6 +6,7 @@ const WorkoutList = ({
   handleEdit,
   handleDrag,
   handleDrop,
+  handleDuplicate,
 }) => {
   // const { workoutPlan, handleDelete } = props;
   return (
@@ -26,6 +27,13 @@ const WorkoutList = ({
                 <span>{workout.time}</span> {workout.name}
               </p>
               <div className="actions-container">
+                <button
+                  onClick={() => {
+                    handleDuplicate(workoutIndex);
+                  }}
+                >
+                  <i class="fa-regular fa-clone fa-lg"></i>
+                </button>
                 <button
                   onClick={() => {
                     handleEdit(workoutIndex);
