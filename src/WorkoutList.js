@@ -1,13 +1,27 @@
 import React from "react";
 
-const WorkoutList = ({ workoutPlan, handleDelete, handleEdit }) => {
+const WorkoutList = ({
+  workoutPlan,
+  handleDelete,
+  handleEdit,
+  handleDrag,
+  handleDrop,
+}) => {
   // const { workoutPlan, handleDelete } = props;
   return (
     <div>
       <ul>
         {workoutPlan.map((workout, workoutIndex) => {
           return (
-            <li className="workout-item" key={workoutIndex}>
+            // <li className="workout-item" key={workoutIndex}>
+            <li
+              className="workout-item"
+              key={workoutIndex}
+              draggable
+              onDragStart={() => handleDrag(workoutIndex)}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={() => handleDrop(workoutIndex)}
+            >
               <p>
                 {workout.time}s {workout.name}
               </p>

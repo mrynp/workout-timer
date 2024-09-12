@@ -8,6 +8,7 @@ function App() {
   const [workoutPlan, setWorkoutPlan] = useState([]);
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseTime, setExerciseTime] = useState("");
+  const [draggedItemIndex, setDraggedItemIndex] = useState(null);
 
   const addExerciseToWorkout = (exercise) => {
     setWorkoutPlan((prevPlan) => [...prevPlan, exercise]);
@@ -25,9 +26,25 @@ function App() {
     const editExerciseTime = workoutPlan[index].time;
     setExerciseName(editExerciseName);
     setExerciseTime(editExerciseTime);
-    console.log(editExerciseName);
-    console.log(editExerciseTime);
     handleDelete(index);
+  };
+
+  const handleDrag = (index) => {
+    setDraggedItemIndex(index);
+  };
+
+  const handleDrop = (index) => {
+    const draggedItem = workoutPlan[draggedItemIndex];
+    const remainingItems = workoutPlan.filter((_, i) => i !== draggedItemIndex);
+
+    const reorderedWorkoutPlan = [
+      ...remainingItems.slice(0, index),
+      draggedItem,
+      ...remainingItems.slice(index),
+    ];
+
+    setWorkoutPlan(reorderedWorkoutPlan);
+    setDraggedItemIndex(null);
   };
 
   return (
@@ -44,6 +61,8 @@ function App() {
       <WorkoutList
         handleEdit={handleEdit}
         handleDelete={handleDelete}
+        handleDrag={handleDrag}
+        handleDrop={handleDrop}
         workoutPlan={workoutPlan}
       />
     </div>
