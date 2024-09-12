@@ -14,18 +14,14 @@ const WorkoutInput = ({
     return string.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
   };
 
-  const secondsToMinutes = (time) => {
-    const minutes = `${Math.floor(time / 60)}`.padStart(2, "0");
-    const seconds = `${time - minutes * 60}`.padStart(2, "0");
-    return `${minutes}:${seconds}`;
-  };
-
   const handleAddExercise = () => {
     if (exerciseName && exerciseTime) {
       onAddExercise({
         name: capitalizeFirstLetter(exerciseName),
-        time: secondsToMinutes(exerciseTime),
+        time: parseInt(exerciseTime),
       });
+      setExerciseName("");
+      setExerciseTime("");
     }
   };
 
@@ -41,7 +37,7 @@ const WorkoutInput = ({
     if (restTime) {
       onAddExercise({
         name: "Rest",
-        time: secondsToMinutes(restTime),
+        time: parseInt(restTime),
       });
     }
   };
@@ -67,8 +63,6 @@ const WorkoutInput = ({
           <button
             onClick={() => {
               handleAddExercise();
-              setExerciseName("");
-              setExerciseTime("");
             }}
           >
             Add Exercise
@@ -81,6 +75,7 @@ const WorkoutInput = ({
             onChange={(e) => setRestTime(e.target.value)}
             type="number"
             placeholder="Time (s)"
+            required
           />
           <button
             onClick={() => {

@@ -8,13 +8,17 @@ const WorkoutList = ({
   handleDrop,
   handleDuplicate,
 }) => {
-  // const { workoutPlan, handleDelete } = props;
+  const secondsToMinutes = (time) => {
+    const minutes = `${Math.floor(time / 60)}`.padStart(2, "0");
+    const seconds = `${time - minutes * 60}`.padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  };
+
   return (
     <div>
       <ul>
         {workoutPlan.map((workout, workoutIndex) => {
           return (
-            // <li className="workout-item" key={workoutIndex}>
             <li
               className="workout-item"
               key={workoutIndex}
@@ -24,7 +28,7 @@ const WorkoutList = ({
               onDrop={() => handleDrop(workoutIndex)}
             >
               <p>
-                <span>{workout.time}</span> {workout.name}
+                <span>{secondsToMinutes(workout.time)}</span> {workout.name}
               </p>
               <div className="actions-container">
                 <button
