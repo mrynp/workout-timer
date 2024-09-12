@@ -23,7 +23,7 @@ const WorkoutList = ({
               onDrop={() => handleDrop(workoutIndex)}
             >
               <p>
-                {workout.time}s {workout.name}
+                <span>{workout.time}</span> {workout.name}
               </p>
               <div className="actions-container">
                 <button

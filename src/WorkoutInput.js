@@ -10,11 +10,21 @@ const WorkoutInput = ({
 }) => {
   const [restTime, setRestTime] = useState("");
 
+  const capitalizeFirstLetter = (string) => {
+    return string.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
+  };
+
+  const secondsToMinutes = (time) => {
+    const minutes = `${Math.floor(time / 60)}`.padStart(2, "0");
+    const seconds = `${time - minutes * 60}`.padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  };
+
   const handleAddExercise = () => {
     if (exerciseName && exerciseTime) {
       onAddExercise({
-        name: exerciseName,
-        time: parseInt(exerciseTime),
+        name: capitalizeFirstLetter(exerciseName),
+        time: secondsToMinutes(exerciseTime),
       });
     }
   };
@@ -31,7 +41,7 @@ const WorkoutInput = ({
     if (restTime) {
       onAddExercise({
         name: "Rest",
-        time: parseInt(restTime),
+        time: secondsToMinutes(restTime),
       });
     }
   };
