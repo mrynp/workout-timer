@@ -27,30 +27,31 @@ const WorkoutList = ({
               onDragOver={(e) => e.preventDefault()}
               onDrop={() => handleDrop(workoutIndex)}
             >
-              <p>
-                <span>{secondsToMinutes(workout.time)}</span> {workout.name}
-              </p>
+              <div className="workout-name">{workout.name}</div>
+              <div className="workout-time">
+                {secondsToMinutes(workout.time)}
+              </div>
               <div className="actions-container">
                 <button
                   onClick={() => {
                     handleDuplicate(workoutIndex);
                   }}
                 >
-                  <i class="fa-regular fa-clone fa-lg"></i>
+                  <i className="fa-regular fa-clone fa-lg"></i>
                 </button>
                 <button
                   onClick={() => {
                     handleEdit(workoutIndex);
                   }}
                 >
-                  <i class="fa-regular fa-pen-to-square fa-lg"></i>
+                  <i className="fa-regular fa-pen-to-square fa-lg"></i>
                 </button>
                 <button
                   onClick={() => {
                     handleDelete(workoutIndex);
                   }}
                 >
-                  <i class="fa-regular fa-square-minus fa-lg"></i>
+                  <i className="fa-regular fa-square-minus fa-lg"></i>
                 </button>
               </div>
             </li>

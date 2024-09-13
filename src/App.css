@@ -5,9 +5,10 @@
   font-family: "Montserrat", sans-serif;
 }
 
-#root {
+.App {
+  width: 100%;
+  height: 100vh;
   display: flex;
-  align-items: center;
   flex-direction: column;
   height: 100vh;
   text-align: center;
@@ -18,35 +19,35 @@
 }
 
 .input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 30px auto;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
-.input-container input {
+.input-container div > input,
+button {
+  margin: 10px 5px;
   padding: 0 10px;
-  margin: 0 10px;
   font-size: 16px;
   height: 44px;
 }
 
-.input-container div {
-  margin: 10px 0;
+.input-container > div {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 .exercise-input {
-  width: 240px;
+  flex: 1;
 }
 
 .time-input {
-  width: 120px;
+  width: 100px;
 }
 
 .input-container button {
   width: 130px;
   padding: 10px;
-  margin: 0 10px;
   height: 44px;
   font-size: 16px;
 }
@@ -55,11 +56,25 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px;
+  padding: 8px 20px;
   border-radius: 14px;
   background: rgb(211, 211, 211);
   justify-content: space-between;
-  margin: 9px 0;
+  margin: 9px auto;
+  max-width: 600px;
+}
+
+.workout-name {
+  flex: 1;
+  text-align: left;
+}
+
+.workout-time {
+  background-color: rgb(226, 226, 226);
+  padding: 2px 4px;
+  border-radius: 5px;
+  margin-right: 20px;
+  width: 60px;
 }
 
 .actions-container {
@@ -79,9 +94,9 @@
   opacity: 0.7;
 }
 
-.workout-item p span {
-  background-color: rgb(226, 226, 226);
-  padding: 1px 4px;
-  margin-right: 10px;
-  border-radius: 5px;
+.App .container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
 }

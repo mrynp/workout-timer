@@ -43,49 +43,47 @@ const WorkoutInput = ({
   };
 
   return (
-    <div>
-      <div className="input-container">
-        <div>
-          <input
-            value={exerciseName}
-            className="exercise-input"
-            onChange={(e) => setExerciseName(e.target.value)}
-            type="text"
-            placeholder="Add an exercise..."
-          />
-          <input
-            value={exerciseTime}
-            className="time-input"
-            onChange={(e) => setExerciseTime(e.target.value)}
-            type="number"
-            placeholder="Time (s)"
-          />
-          <button
-            onClick={() => {
-              handleAddExercise();
-            }}
-          >
-            Add Exercise
-          </button>
-        </div>
-        <div>
-          <input
-            value={restTime}
-            className="time-input"
-            onChange={(e) => setRestTime(e.target.value)}
-            type="number"
-            placeholder="Time (s)"
-            required
-          />
-          <button
-            onClick={() => {
-              handleAddRest();
-              setRestTime("");
-            }}
-          >
-            Add Rest
-          </button>
-        </div>
+    <div className="input-container">
+      <div>
+        <input
+          value={exerciseName}
+          className="exercise-input"
+          onChange={(e) => setExerciseName(e.target.value)}
+          type="text"
+          placeholder="Add an exercise..."
+        />
+        <input
+          value={exerciseTime}
+          className="time-input"
+          onChange={(e) => setExerciseTime(e.target.value)}
+          type="number"
+          placeholder="Time (s)"
+        />
+        <button
+          onClick={() => {
+            handleAddExercise();
+          }}
+        >
+          Add Exercise
+        </button>
+      </div>
+      <div>
+        <input
+          value={restTime}
+          className="time-input"
+          onChange={(e) => setRestTime(e.target.value)}
+          type="number"
+          placeholder="Time (s)"
+          required
+        />
+        <button
+          onClick={() => {
+            handleAddRest();
+            setRestTime("");
+          }}
+        >
+          Add Rest
+        </button>
       </div>
     </div>
   );

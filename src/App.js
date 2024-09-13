@@ -1,6 +1,7 @@
 import React from "react";
 import WorkoutInput from "./WorkoutInput";
 import WorkoutList from "./WorkoutList";
+import WorkoutTimer from "./WorkoutTimer";
 import "./App.css";
 import { useState } from "react";
 
@@ -60,22 +61,29 @@ function App() {
   return (
     <div className="App">
       <h1>Workout Timer</h1>
-      <WorkoutInput
-        exerciseName={exerciseName}
-        setExerciseName={setExerciseName}
-        exerciseTime={exerciseTime}
-        setExerciseTime={setExerciseTime}
-        onAddExercise={addExerciseToWorkout}
-        workoutPlan={workoutPlan}
-      />
-      <WorkoutList
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-        handleDrag={handleDrag}
-        handleDrop={handleDrop}
-        handleDuplicate={handleDuplicate}
-        workoutPlan={workoutPlan}
-      />
+      <div className="container">
+        <div>
+          <WorkoutTimer />
+        </div>
+        <div>
+          <WorkoutInput
+            exerciseName={exerciseName}
+            setExerciseName={setExerciseName}
+            exerciseTime={exerciseTime}
+            setExerciseTime={setExerciseTime}
+            onAddExercise={addExerciseToWorkout}
+            workoutPlan={workoutPlan}
+          />
+          <WorkoutList
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
+            handleDrag={handleDrag}
+            handleDrop={handleDrop}
+            handleDuplicate={handleDuplicate}
+            workoutPlan={workoutPlan}
+          />
+        </div>
+      </div>
     </div>
   );
 }
