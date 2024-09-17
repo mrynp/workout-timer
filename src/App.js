@@ -63,7 +63,7 @@ function App() {
       <h1>Workout Timer</h1>
       <div className="container">
         <div>
-          <WorkoutTimer />
+          <WorkoutTimer workoutPlan={workoutPlan} />
         </div>
         <div>
           <WorkoutInput
