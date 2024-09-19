@@ -30,6 +30,19 @@ const WorkoutTimer = ({ workoutPlan }) => {
     }
   };
 
+  const toggleTimer = () => {
+    if (isRunning) {
+      setIsRunning(false);
+    } else {
+      if (workoutPlan.length > 0) {
+        if (timeRemaining === 0 && currentExerciseIndex === 0) {
+          setTimeRemaining(workoutPlan[0].time);
+        }
+        setIsRunning(true);
+      }
+    }
+  };
+
   const currentExercise = workoutPlan[currentExerciseIndex];
   const nextExercise =
     currentExerciseIndex < workoutPlan.length - 1
@@ -46,7 +59,7 @@ const WorkoutTimer = ({ workoutPlan }) => {
         </div>
       )}
 
-      <button onClick={startWorkout}>Start Workout</button>
+      <button onClick={toggleTimer}>{isRunning ? "Pause" : "Start"}</button>
     </div>
   );
 };
