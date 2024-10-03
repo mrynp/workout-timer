@@ -4,6 +4,7 @@ import WorkoutList from "./WorkoutList";
 import WorkoutTimer from "./WorkoutTimer";
 import "./App.css";
 import { useState } from "react";
+import texture from "./assets/texture.png";
 
 function App() {
   const [workoutPlan, setWorkoutPlan] = useState([]);
@@ -59,32 +60,56 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Workout Timer</h1>
-      <div className="container">
-        <div>
-          <WorkoutTimer workoutPlan={workoutPlan} />
-        </div>
-        <div>
-          <WorkoutInput
-            exerciseName={exerciseName}
-            setExerciseName={setExerciseName}
-            exerciseTime={exerciseTime}
-            setExerciseTime={setExerciseTime}
-            onAddExercise={addExerciseToWorkout}
-            workoutPlan={workoutPlan}
-          />
-          <WorkoutList
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            handleDrag={handleDrag}
-            handleDrop={handleDrop}
-            handleDuplicate={handleDuplicate}
-            workoutPlan={workoutPlan}
-          />
+    <main>
+      <div className="app-container">
+        <div className="App">
+          <div className="app-filter">
+            <div className="app-layer">
+              <div className="app-second-layer"></div>
+            </div>
+            <img className="texture" src={texture} alt=""></img>
+            <div className="workout-container">
+              <div className="left-container">
+                <div className="app-name">
+                  <h1>Workout Timer</h1>
+                </div>
+                <div className="app-workout">
+                  <div className="screen-gradient">
+                    <div className="screen-border">
+                      <div className="screen">
+                        <WorkoutInput
+                          exerciseName={exerciseName}
+                          setExerciseName={setExerciseName}
+                          exerciseTime={exerciseTime}
+                          setExerciseTime={setExerciseTime}
+                          onAddExercise={addExerciseToWorkout}
+                          workoutPlan={workoutPlan}
+                        />
+                        <WorkoutList
+                          handleEdit={handleEdit}
+                          handleDelete={handleDelete}
+                          handleDrag={handleDrag}
+                          handleDrop={handleDrop}
+                          handleDuplicate={handleDuplicate}
+                          workoutPlan={workoutPlan}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="divider">
+                <div className="line"></div>
+              </div>
+
+              <div className="right-container">
+                <WorkoutTimer workoutPlan={workoutPlan} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 
