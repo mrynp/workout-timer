@@ -39,6 +39,7 @@ const WorkoutInput = ({
         name: "Rest",
         time: parseInt(restTime),
       });
+      setRestTime("");
     }
   };
 
@@ -90,7 +91,7 @@ const WorkoutInput = ({
           />
           <button
             onClick={() => {
-              handleAddExercise();
+              handleAddRest();
             }}
           >
             Add

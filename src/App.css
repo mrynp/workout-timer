@@ -313,11 +313,13 @@ main {
 
 .input-container {
   z-index: 10;
+  position: sticky;
 }
 
 .input-container > div {
   display: flex;
   background-color: rgba(21, 20, 23, 1);
+
   padding: 0.75rem;
   flex-direction: column;
   gap: 10px;
@@ -325,9 +327,6 @@ main {
 
 .input-container > div > div {
   height: 2.75rem;
-  /* padding-left: 12px; */
-  /* padding-right: 12px; */
-  /* border-radius: 0.5rem; */
   display: flex;
   gap: 5px;
   align-items: center;
@@ -375,6 +374,50 @@ input[type="number"] {
 
   align-items: center;
 }
+
+.list-container {
+  color: #fff;
+  font-size: 14px;
+}
+
+.list-container li > div:nth-child(1) {
+  /* padding-left: 20px;
+  padding-right: 20px; */
+  padding: 4px 20px 4px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-title div:nth-child(1) {
+  color: #71717a;
+  text-transform: uppercase;
+  font-size: 10.4px;
+  font-weight: 500;
+  height: 50px;
+}
+
+.li-border {
+  border-top: 1px solid rgba(0, 0, 0, 0.75);
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.05);
+}
+
+.list-container button {
+  background: none;
+  width: 0;
+}
+
+.actions-container {
+  display: flex;
+  gap: 10px;
+}
+
+.list-container li > div:nth-child(1) > div:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
 /* 
 
 .input-container {
