@@ -45,45 +45,66 @@ const WorkoutInput = ({
   return (
     <div className="input-container">
       <div>
-        <input
-          value={exerciseName}
-          className="exercise-input"
-          onChange={(e) => setExerciseName(e.target.value)}
-          type="text"
-          placeholder="Add an exercise..."
-        />
-        <input
-          value={exerciseTime}
-          className="time-input"
-          onChange={(e) => setExerciseTime(e.target.value)}
-          type="number"
-          placeholder="Time (s)"
-        />
-        <button
-          onClick={() => {
-            handleAddExercise();
-          }}
-        >
-          Add Exercise
-        </button>
-      </div>
-      <div>
-        <input
-          value={restTime}
-          className="time-input"
-          onChange={(e) => setRestTime(e.target.value)}
-          type="number"
-          placeholder="Time (s)"
-          required
-        />
-        <button
-          onClick={() => {
-            handleAddRest();
-            setRestTime("");
-          }}
-        >
-          Add Rest
-        </button>
+        <div>
+          <input
+            value={exerciseName}
+            className="exercise-input"
+            onChange={(e) => setExerciseName(e.target.value)}
+            type="text"
+            placeholder="Add an exercise..."
+          />
+
+          <input
+            value={exerciseTime}
+            className="time-input"
+            onChange={(e) => setExerciseTime(e.target.value)}
+            type="number"
+            placeholder="Time (s)"
+          />
+          <button
+            onClick={() => {
+              handleAddExercise();
+            }}
+          >
+            Add
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="15"
+              height="15"
+              fill="rgba(228,228,231,1)"
+            >
+              <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+            </svg>
+          </button>
+        </div>
+        <div>
+          <div className="rest-input">Rest</div>
+          <input
+            value={restTime}
+            className="time-input"
+            onChange={(e) => setRestTime(e.target.value)}
+            type="number"
+            placeholder="Time (s)"
+            required
+          />
+          <button
+            onClick={() => {
+              handleAddExercise();
+            }}
+          >
+            Add
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="15"
+              height="15"
+              fill="rgba(228,228,231,1)"
+            >
+              <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   );

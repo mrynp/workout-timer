@@ -1,8 +1,13 @@
 * {
   padding: 0px;
-
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
+}
+
+button {
+  padding: 0;
+  border: none;
+  background: none;
 }
 
 main {
@@ -17,30 +22,6 @@ main {
   align-items: center;
   display: flex;
 }
-
-/* .App {
-  margin-top: 28px;
-  width: 950px;
-  height: 716px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  background-color: #f87171;
-  border-radius: 1.5rem;
-  position: relative;
-}
-
-.App::before {
-  content: "";
-  border-radius: 1.5rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(../assets/texture.png);
-  mix-blend-mode: multiply;
-} */
 
 .App {
   display: flex;
@@ -112,7 +93,7 @@ main {
 .line {
   display: block;
   width: 2px;
-  height: 100%; /* Take the full height of the parent container */
+  height: 100%;
   border-left: 1px solid rgba(0, 0, 0, 0.2);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   margin-left: 0.75rem;
@@ -126,6 +107,13 @@ main {
   inset: 0;
   position: fixed;
   flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .app-name {
@@ -158,8 +146,7 @@ main {
   background-image: linear-gradient(
     to bottom right,
     hsla(0, 0%, 100%, 0.05) 30%,
-    /* from-white/5 at 30% */ hsla(0, 0%, 100%, 0.25) 70%
-      /* to-white/25 at 70% */
+    hsla(0, 0%, 100%, 0.25) 70%
   );
 }
 
@@ -184,6 +171,84 @@ main {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   height: 100%;
+}
+
+.app-buttons {
+  gap: 0.5rem;
+  justify-content: end;
+  align-items: center;
+  display: flex;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.125rem;
+}
+
+.btn-padding {
+  /* width: 100%; */
+  position: relative;
+  border-radius: 9999px;
+  padding: 6px;
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 0, 0.16),
+    rgba(0, 0, 0, 0.08),
+    rgba(255, 255, 255, 0.25)
+  );
+}
+
+.custom-btn {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  outline: none;
+  background-color: rgba(38, 37, 40, 1);
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.05),
+    rgba(0, 0, 0, 0.75)
+  );
+
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.8), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s ease-in-out, background 0.1s ease-in-out;
+  cursor: pointer;
+}
+
+.custom-btn:active {
+  transform: scale(0.98);
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.04),
+    rgba(0, 0, 0, 0.6)
+  );
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.6), 0 1px 2px -1px rgba(0, 0, 0, 0.09);
+}
+
+.custom-btn:active .icon {
+  fill: rgba(254, 243, 200, 0.9);
+}
+
+.btn-label {
+  position: relative;
+  text-align: center;
+  letter-spacing: 0.05em;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.3s ease-in-out;
+  color: hsla(48, 96%, 89%, 0.75);
+  z-index: 0;
+  text-shadow: 0 0 2px hsla(0, 0%, 100%, 0.1);
 }
 
 @media (min-width: 1024px) {
@@ -217,9 +282,12 @@ main {
     padding-left: 0.75rem;
   }
 
+  .app-header {
+    padding: 0;
+  }
+
   .right-container {
     width: 418px;
-    padding-right: 0.75rem;
   }
 
   .screen-gradient {
@@ -231,8 +299,82 @@ main {
     border-width: 1px;
     border-radius: 1rem;
   }
+
+  .input-container {
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .input-container > div {
+    position: sticky;
+  }
 }
 
+.input-container {
+  z-index: 10;
+}
+
+.input-container > div {
+  display: flex;
+  background-color: rgba(21, 20, 23, 1);
+  padding: 0.75rem;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-container > div > div {
+  height: 2.75rem;
+  /* padding-left: 12px; */
+  /* padding-right: 12px; */
+  /* border-radius: 0.5rem; */
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.input-container div > div > input,
+button,
+.rest-input {
+  background-color: rgb(39, 39, 42);
+  padding: 10px;
+  border: none;
+  color: #ffffffcf;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  width: 77px;
+}
+
+.exercise-input,
+.rest-input {
+  flex: 1;
+}
+
+.time-input {
+  width: 100px;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input-container button {
+  display: flex;
+
+  align-items: center;
+}
 /* 
 
 .input-container {
