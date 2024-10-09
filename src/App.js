@@ -59,14 +59,9 @@ function App() {
     setWorkoutPlan(newWorkoutPlan);
   };
 
-  const handleReset = () => {
-    const startBtn = document.querySelector(".start-btn");
-    const pauseBtn = document.querySelector(".pause-btn");
-    const resetBtn = document.querySelector(".reset-btn");
-    resetBtn.style.fill = "rgba(254, 243, 200, 0.9)";
-    startBtn.style.fill = "rgba(255, 255, 255, 0.4";
-    pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
+  const handleReset = (resetTimer) => {
     setWorkoutPlan([]);
+    if (resetTimer) resetTimer();
   };
 
   return (

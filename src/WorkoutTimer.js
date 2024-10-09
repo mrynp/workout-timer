@@ -10,27 +10,29 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
   const resetBtn = document.querySelector(".reset-btn");
 
   const startWorkout = () => {
-    startBtn.style.fill = "rgba(254, 243, 200, 0.9)";
-    pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
-    resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
     if (workoutPlan.length > 0) {
       if (timeRemaining === 0 && currentExerciseIndex === 0) {
         setTimeRemaining(workoutPlan[0].time);
       }
       setIsRunning(true);
+      startBtn.style.fill = "rgba(254, 243, 200, 0.9)";
+      pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
+      resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
+    } else {
+      alert("Add workout first");
     }
   };
 
   const pauseWorkout = () => {
-    startBtn.style.fill = "rgba(255, 255, 255, 0.4";
-    pauseBtn.style.fill = "rgba(254, 243, 200, 0.9)";
-    resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
-    setIsRunning(false);
+    if (workoutPlan.length > 0) {
+      startBtn.style.fill = "rgba(255, 255, 255, 0.4";
+      pauseBtn.style.fill = "rgba(254, 243, 200, 0.9)";
+      resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
+      setIsRunning(false);
+    } else {
+      alert("Add workout first");
+    }
   };
-
-  // const resetWorkout = () => {
-  //   setIsReset(true);
-  // };
 
   useEffect(() => {
     let timer;
@@ -44,11 +46,23 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
         setTimeRemaining(workoutPlan[currentExerciseIndex + 1].time);
       } else {
         setIsRunning(false);
-        // toggleTimer();
       }
     }
     return () => clearInterval(timer);
   }, [isRunning, timeRemaining, currentExerciseIndex, workoutPlan]);
+
+  const resetTimer = () => {
+    if (workoutPlan.length > 0) {
+      resetBtn.style.fill = "rgba(254, 243, 200, 0.9)";
+      startBtn.style.fill = "rgba(255, 255, 255, 0.4";
+      pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
+      setIsRunning(false);
+      setCurrentExerciseIndex(0);
+      setTimeRemaining(0);
+    } else {
+      alert("Add workout first");
+    }
+  };
 
   const currentExercise = workoutPlan[currentExerciseIndex];
   const nextExercise =
@@ -100,7 +114,10 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
           </div>
           <div className="btn-container">
             <div className="btn-padding">
-              <button className="custom-btn" onClick={handleReset}>
+              <button
+                className="custom-btn"
+                onClick={() => handleReset(resetTimer)}
+              >
                 <svg
                   className="reset-btn"
                   xmlns="http://www.w3.org/2000/svg"
