@@ -64,6 +64,12 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
     }
   };
 
+  const secondsToMinutes = (time) => {
+    const minutes = `${Math.floor(time / 60)}`.padStart(2, "0");
+    const seconds = `${time - minutes * 60}`.padStart(2, "0");
+    return `${minutes}:${seconds}`;
+  };
+
   const currentExercise = workoutPlan[currentExerciseIndex];
   const nextExercise =
     currentExerciseIndex < workoutPlan.length - 1
@@ -139,7 +145,7 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
           <div className="screen-border">
             <div className="screen">
               <div className="timer-container">
-                <div className="timer">{timeRemaining}</div>
+                <div className="timer">{secondsToMinutes(timeRemaining)}</div>
                 <h1>{currentExercise?.name}</h1>
                 {nextExercise && <h2>Next: {nextExercise.name}</h2>}
               </div>
