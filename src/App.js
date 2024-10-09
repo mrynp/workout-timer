@@ -59,6 +59,16 @@ function App() {
     setWorkoutPlan(newWorkoutPlan);
   };
 
+  const handleReset = () => {
+    const startBtn = document.querySelector(".start-btn");
+    const pauseBtn = document.querySelector(".pause-btn");
+    const resetBtn = document.querySelector(".reset-btn");
+    resetBtn.style.fill = "rgba(254, 243, 200, 0.9)";
+    startBtn.style.fill = "rgba(255, 255, 255, 0.4";
+    pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
+    setWorkoutPlan([]);
+  };
+
   return (
     <main>
       <div className="app-container">
@@ -69,7 +79,10 @@ function App() {
             </div>
             <img className="texture" src={texture} alt=""></img>
             <div className="workout-container">
-              <WorkoutTimer workoutPlan={workoutPlan} />
+              <WorkoutTimer
+                workoutPlan={workoutPlan}
+                handleReset={handleReset}
+              />
 
               <div className="divider">
                 <div className="line"></div>

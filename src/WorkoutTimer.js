@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-const WorkoutTimer = ({ workoutPlan }) => {
+const WorkoutTimer = ({ workoutPlan, handleReset }) => {
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
 
+  const startBtn = document.querySelector(".start-btn");
+  const pauseBtn = document.querySelector(".pause-btn");
+  const resetBtn = document.querySelector(".reset-btn");
+
   const startWorkout = () => {
+    startBtn.style.fill = "rgba(254, 243, 200, 0.9)";
+    pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
+    resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
     if (workoutPlan.length > 0) {
       if (timeRemaining === 0 && currentExerciseIndex === 0) {
         setTimeRemaining(workoutPlan[0].time);
@@ -15,8 +22,15 @@ const WorkoutTimer = ({ workoutPlan }) => {
   };
 
   const pauseWorkout = () => {
+    startBtn.style.fill = "rgba(255, 255, 255, 0.4";
+    pauseBtn.style.fill = "rgba(254, 243, 200, 0.9)";
+    resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
     setIsRunning(false);
   };
+
+  // const resetWorkout = () => {
+  //   setIsReset(true);
+  // };
 
   useEffect(() => {
     let timer;
@@ -54,15 +68,12 @@ const WorkoutTimer = ({ workoutPlan }) => {
             <div className="btn-padding">
               <button className="custom-btn" onClick={startWorkout}>
                 <svg
+                  className="start-btn"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   width="16"
                   height="16"
-                  fill={`${
-                    isRunning
-                      ? "rgba(254, 243, 200, 0.9)"
-                      : "rgba(255, 255, 255, 0.4)"
-                  }`}
+                  fill="rgba(255, 255, 255, 0.4)"
                 >
                   <path d="M9 8.48216V15.518L15.0307 12.0001L9 8.48216ZM7.75194 5.43872L18.2596 11.5682C18.4981 11.7073 18.5787 12.0135 18.4396 12.252C18.3961 12.3265 18.3341 12.3885 18.2596 12.432L7.75194 18.5615C7.51341 18.7006 7.20725 18.62 7.06811 18.3815C7.0235 18.305 7 18.2181 7 18.1296V5.87061C7 5.59446 7.22386 5.37061 7.5 5.37061C7.58853 5.37061 7.67547 5.39411 7.75194 5.43872Z"></path>
                 </svg>
@@ -72,20 +83,14 @@ const WorkoutTimer = ({ workoutPlan }) => {
           </div>
           <div className="btn-container">
             <div className="btn-padding">
-              <button
-                className={`custom-btn ${!isRunning ? "icon" : ""}`}
-                onClick={pauseWorkout}
-              >
+              <button className="custom-btn " onClick={pauseWorkout}>
                 <svg
+                  className="pause-btn"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   width="16"
                   height="16"
-                  fill={`${
-                    !isRunning
-                      ? "rgba(254, 243, 200, 0.9)"
-                      : "rgba(255, 255, 255, 0.4)"
-                  }`}
+                  fill="rgba(255, 255, 255, 0.4)"
                 >
                   <path d="M15 7C15 6.44772 15.4477 6 16 6C16.5523 6 17 6.44772 17 7V17C17 17.5523 16.5523 18 16 18C15.4477 18 15 17.5523 15 17V7ZM7 7C7 6.44772 7.44772 6 8 6C8.55228 6 9 6.44772 9 7V17C9 17.5523 8.55228 18 8 18C7.44772 18 7 17.5523 7 17V7Z"></path>
                 </svg>
@@ -95,8 +100,9 @@ const WorkoutTimer = ({ workoutPlan }) => {
           </div>
           <div className="btn-container">
             <div className="btn-padding">
-              <button className="custom-btn">
+              <button className="custom-btn" onClick={handleReset}>
                 <svg
+                  className="reset-btn"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   width="12"
