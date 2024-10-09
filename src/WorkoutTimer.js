@@ -7,8 +7,9 @@ const WorkoutTimer = ({ workoutPlan }) => {
 
   const startWorkout = () => {
     if (workoutPlan.length > 0) {
-      setCurrentExerciseIndex(0);
-      setTimeRemaining(workoutPlan[0].time);
+      if (timeRemaining === 0 && currentExerciseIndex === 0) {
+        setTimeRemaining(workoutPlan[0].time);
+      }
       setIsRunning(true);
     }
   };
@@ -33,26 +34,7 @@ const WorkoutTimer = ({ workoutPlan }) => {
       }
     }
     return () => clearInterval(timer);
-  }, [
-    isRunning,
-    timeRemaining,
-    currentExerciseIndex,
-    workoutPlan,
-    // toggleTimer,
-  ]);
-
-  // const toggleTimer = () => {
-  //   if (isRunning) {
-  //     setIsRunning(false);
-  //   } else {
-  //     if (workoutPlan.length > 0) {
-  //       if (timeRemaining === 0 && currentExerciseIndex === 0) {
-  //         setTimeRemaining(workoutPlan[0].time);
-  //       }
-  //       setIsRunning(true);
-  //     }
-  //   }
-  // };
+  }, [isRunning, timeRemaining, currentExerciseIndex, workoutPlan]);
 
   const currentExercise = workoutPlan[currentExerciseIndex];
   const nextExercise =
