@@ -153,15 +153,13 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
           <div className="screen-border">
             <div className="screen">
               <div className="timer-container">
-                <div className="circle">
-                  <div className="dots"></div>
+                <div className="timer-circle">
                   <svg>
                     <circle cx="125" cy="125" r="125"></circle>
                     <circle
                       cx="125"
                       cy="125"
                       r="125"
-                      id="progress"
                       style={{
                         strokeDasharray: circumference,
                         strokeDashoffset: calculateOffset(),
@@ -170,9 +168,10 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
                   </svg>
                   <div className="timer">{secondsToMinutes(timeRemaining)}</div>
                 </div>
-
-                <h1>{currentExercise?.name}</h1>
-                {nextExercise && <h2>Next: {nextExercise.name}</h2>}
+                <div className="timer-text">
+                  <h1>{currentExercise?.name}</h1>
+                  {nextExercise && <h2>Next: {nextExercise.name}</h2>}
+                </div>
               </div>
             </div>
           </div>
