@@ -4,6 +4,8 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [displayTimer, setDisplayTimer] = useState(false);
+  const [workoutEnded, setWorkoutEnded] = useState(false);
 
   const startBtn = document.querySelector(".start-btn");
   const pauseBtn = document.querySelector(".pause-btn");
@@ -17,22 +19,25 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
         setTimeRemaining(workoutPlan[0].time);
       }
       setIsRunning(true);
+      setDisplayTimer(true);
+      setWorkoutEnded(false);
       startBtn.style.fill = "rgba(254, 243, 200, 0.9)";
       pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
       resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
     } else {
-      alert("Add workout first");
+      return;
     }
   };
 
   const pauseWorkout = () => {
-    if (workoutPlan.length > 0) {
+    if (isRunning) {
       startBtn.style.fill = "rgba(255, 255, 255, 0.4";
       pauseBtn.style.fill = "rgba(254, 243, 200, 0.9)";
       resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
       setIsRunning(false);
+      setDisplayTimer(true);
     } else {
-      alert("Add workout first");
+      return;
     }
   };
 
@@ -42,10 +47,12 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
       startBtn.style.fill = "rgba(255, 255, 255, 0.4";
       pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
       setIsRunning(false);
+      setDisplayTimer(false);
       setCurrentExerciseIndex(0);
       setTimeRemaining(0);
+      setWorkoutEnded(false);
     } else {
-      alert("Add workout first");
+      return;
     }
   };
 
@@ -61,6 +68,8 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
         setTimeRemaining(workoutPlan[currentExerciseIndex + 1].time);
       } else {
         setIsRunning(false);
+        setDisplayTimer(false);
+        setWorkoutEnded(true);
       }
     }
     return () => clearInterval(timer);
@@ -153,25 +162,51 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
           <div className="screen-border">
             <div className="screen">
               <div className="timer-container">
-                <div className="timer-circle">
-                  <svg>
-                    <circle cx="125" cy="125" r="125"></circle>
-                    <circle
-                      cx="125"
-                      cy="125"
-                      r="125"
-                      style={{
-                        strokeDasharray: circumference,
-                        strokeDashoffset: calculateOffset(),
-                      }}
-                    ></circle>
-                  </svg>
-                  <div className="timer">{secondsToMinutes(timeRemaining)}</div>
-                </div>
-                <div className="timer-text">
-                  <h1>{currentExercise?.name}</h1>
-                  {nextExercise && <h2>Next: {nextExercise.name}</h2>}
-                </div>
+                {!displayTimer ? (
+                  <div className="timer-status">
+                    {workoutEnded ? (
+                      <h2>Workout Ended</h2>
+                    ) : (
+                      <div>
+                        <h2>Add exercises</h2>
+
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          width="18"
+                          height="18"
+                          fill="#71717a"
+                        >
+                          <path d="M13.0001 16.1716L18.3641 10.8076L19.7783 12.2218L12.0001 20L4.22192 12.2218L5.63614 10.8076L11.0001 16.1716V4H13.0001V16.1716Z"></path>
+                        </svg>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="timer-display">
+                    <div className="timer-circle">
+                      <svg>
+                        <circle cx="125" cy="125" r="125"></circle>
+                        <circle
+                          cx="125"
+                          cy="125"
+                          r="125"
+                          style={{
+                            strokeDasharray: circumference,
+                            strokeDashoffset: calculateOffset(),
+                          }}
+                        ></circle>
+                      </svg>
+                      <div className="timer">
+                        {secondsToMinutes(timeRemaining)}
+                      </div>
+                    </div>
+                    <div className="timer-text">
+                      <h1>{currentExercise?.name}</h1>
+                      {nextExercise && <h2>Next: {nextExercise.name}</h2>}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

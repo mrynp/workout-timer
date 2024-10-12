@@ -77,8 +77,8 @@ main {
 
 .workout-container {
   display: flex;
-  padding-left: 0.75 rem;
-  padding-right: 0.75rem;
+  padding-left: 0.2rem;
+  padding-right: 0.2rem;
   justify-content: center;
   height: 100%;
   flex-direction: column;
@@ -272,7 +272,7 @@ main {
 
   .workout-container {
     display: flex;
-    padding-left: 0.75 rem;
+    padding-left: 0;
     padding-right: 0.75rem;
     justify-content: center;
     height: 100%;
@@ -364,6 +364,10 @@ main {
     margin-top: 30px;
     height: 140px;
     gap: 14px;
+  }
+
+  .timer-status svg {
+    transform: rotate(270deg);
   }
 }
 
@@ -522,4 +526,15 @@ h2 {
   padding: 0 20px;
   align-items: center;
   justify-content: start;
+}
+
+.timer-status {
+  height: 100%;
+  padding-top: 40px;
+}
+
+.timer-status > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
