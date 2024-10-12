@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 const WorkoutInput = ({
   onAddExercise,
-  workoutPlan,
+  isRunning,
   exerciseName,
   setExerciseName,
   exerciseTime,
@@ -33,6 +33,7 @@ const WorkoutInput = ({
             onChange={(e) => setExerciseName(e.target.value)}
             type="text"
             placeholder="Add an exercise..."
+            disabled={isRunning}
           />
 
           <input
@@ -41,12 +42,9 @@ const WorkoutInput = ({
             onChange={(e) => setExerciseTime(e.target.value)}
             type="number"
             placeholder="Time (s)"
+            disabled={isRunning}
           />
-          <button
-            onClick={() => {
-              handleAddExercise();
-            }}
-          >
+          <button onClick={handleAddExercise} disabled={isRunning}>
             Add
             <svg
               xmlns="http://www.w3.org/2000/svg"

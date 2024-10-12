@@ -11,6 +11,7 @@ function App() {
   const [exerciseName, setExerciseName] = useState("");
   const [exerciseTime, setExerciseTime] = useState("");
   const [draggedItemIndex, setDraggedItemIndex] = useState(null);
+  const [isRunning, setIsRunning] = useState(false);
 
   const addExerciseToWorkout = (exercise) => {
     setWorkoutPlan((prevPlan) => [...prevPlan, exercise]);
@@ -75,6 +76,8 @@ function App() {
             <img className="texture" src={texture} alt=""></img>
             <div className="workout-container">
               <WorkoutTimer
+                isRunning={isRunning}
+                setIsRunning={setIsRunning}
                 workoutPlan={workoutPlan}
                 handleReset={handleReset}
               />
@@ -89,12 +92,12 @@ function App() {
                     <div className="screen-border">
                       <div className="screen">
                         <WorkoutInput
+                          isRunning={isRunning}
                           exerciseName={exerciseName}
                           setExerciseName={setExerciseName}
                           exerciseTime={exerciseTime}
                           setExerciseTime={setExerciseTime}
                           onAddExercise={addExerciseToWorkout}
-                          workoutPlan={workoutPlan}
                         />
                         <WorkoutList
                           handleEdit={handleEdit}

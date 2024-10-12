@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-const WorkoutTimer = ({ workoutPlan, handleReset }) => {
+const WorkoutTimer = ({
+  workoutPlan,
+  handleReset,
+  isRunning,
+  setIsRunning,
+}) => {
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [timeRemaining, setTimeRemaining] = useState(0);
-  const [isRunning, setIsRunning] = useState(false);
   const [displayTimer, setDisplayTimer] = useState(false);
   const [workoutEnded, setWorkoutEnded] = useState(false);
 
@@ -73,7 +77,13 @@ const WorkoutTimer = ({ workoutPlan, handleReset }) => {
       }
     }
     return () => clearInterval(timer);
-  }, [isRunning, timeRemaining, currentExerciseIndex, workoutPlan]);
+  }, [
+    isRunning,
+    timeRemaining,
+    currentExerciseIndex,
+    workoutPlan,
+    setIsRunning,
+  ]);
 
   const calculateOffset = () => {
     const totalTime = workoutPlan[currentExerciseIndex]?.time || 1;
