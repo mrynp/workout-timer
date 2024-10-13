@@ -73,6 +73,7 @@ const WorkoutTimer = ({
       } else {
         setIsRunning(false);
         setDisplayTimer(false);
+        startBtn.style.fill = "rgba(255, 255, 255, 0.4";
         setWorkoutEnded(true);
       }
     }
@@ -175,7 +176,7 @@ const WorkoutTimer = ({
                 {!displayTimer ? (
                   <div className="timer-status">
                     {workoutEnded ? (
-                      <h2>Workout Ended</h2>
+                      <h2>Workout Complete</h2>
                     ) : (
                       <div>
                         <h2>Add exercises</h2>
