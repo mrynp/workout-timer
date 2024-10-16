@@ -11,26 +11,25 @@ const WorkoutTimer = ({
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [displayTimer, setDisplayTimer] = useState(false);
   const [workoutEnded, setWorkoutEnded] = useState(false);
-
   const [isPreWorkout, setIsPreWorkout] = useState(true);
 
   const startBtn = document.querySelector(".start-btn");
   const pauseBtn = document.querySelector(".pause-btn");
   const resetBtn = document.querySelector(".reset-btn");
 
+  const beep = new Audio(beepSound);
+
   const circumference = 785.71;
 
   const startWorkout = () => {
     if (workoutPlan.length > 0) {
       if (isPreWorkout) {
+        beep.play();
         setTimeRemaining(5);
         setTimeout(() => {
           setIsPreWorkout(false);
           setTimeRemaining(workoutPlan[0].time);
         }, 5000);
-
-        const beep = new Audio(beepSound);
-        beep.play();
       }
       setIsRunning(true);
       setDisplayTimer(true);
@@ -76,10 +75,14 @@ const WorkoutTimer = ({
         setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
         setTimeRemaining(workoutPlan[currentExerciseIndex + 1].time);
       } else {
-        setIsRunning(false);
-        setDisplayTimer(false);
-        startBtn.style.fill = "rgba(255, 255, 255, 0.4";
-        setWorkoutEnded(true);
+        beep.play();
+        setTimeout(() => {
+          setIsRunning(false);
+          setIsPreWorkout(true);
+          setDisplayTimer(false);
+          startBtn.style.fill = "rgba(255, 255, 255, 0.4";
+          setWorkoutEnded(true);
+        }, 2000);
       }
     }
     return () => clearInterval(timer);
