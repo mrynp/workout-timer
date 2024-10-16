@@ -95,7 +95,13 @@ const WorkoutTimer = ({
   ]);
 
   const calculateOffset = () => {
-    const totalTime = workoutPlan[currentExerciseIndex]?.time || 1;
+    let totalTime;
+    if (isPreWorkout) {
+      totalTime = 5;
+    } else {
+      totalTime = workoutPlan[currentExerciseIndex]?.time || 1;
+    }
+
     const offset = circumference - (timeRemaining / totalTime) * circumference;
     return offset;
   };
@@ -229,7 +235,7 @@ const WorkoutTimer = ({
                       ) : (
                         <>
                           <h1>{currentExercise?.name}</h1>
-                          <h2>Next: {nextExercise?.name}</h2>
+                          {nextExercise && <h2>Next: {nextExercise?.name}</h2>}
                         </>
                       )}
                     </div>
