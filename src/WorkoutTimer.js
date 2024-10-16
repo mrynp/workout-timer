@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import beepSound from "./assets/sounds/beep.mp3";
 
 const WorkoutTimer = ({
   workoutPlan,
@@ -11,6 +12,8 @@ const WorkoutTimer = ({
   const [displayTimer, setDisplayTimer] = useState(false);
   const [workoutEnded, setWorkoutEnded] = useState(false);
 
+  const [isPreWorkout, setIsPreWorkout] = useState(true);
+
   const startBtn = document.querySelector(".start-btn");
   const pauseBtn = document.querySelector(".pause-btn");
   const resetBtn = document.querySelector(".reset-btn");
@@ -19,8 +22,15 @@ const WorkoutTimer = ({
 
   const startWorkout = () => {
     if (workoutPlan.length > 0) {
-      if (timeRemaining === 0 && currentExerciseIndex === 0) {
-        setTimeRemaining(workoutPlan[0].time);
+      if (isPreWorkout) {
+        setTimeRemaining(5);
+        setTimeout(() => {
+          setIsPreWorkout(false);
+          setTimeRemaining(workoutPlan[0].time);
+        }, 5000);
+
+        const beep = new Audio(beepSound);
+        beep.play();
       }
       setIsRunning(true);
       setDisplayTimer(true);
@@ -28,8 +38,6 @@ const WorkoutTimer = ({
       startBtn.style.fill = "rgba(254, 243, 200, 0.9)";
       pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
       resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
-    } else {
-      return;
     }
   };
 
@@ -40,8 +48,6 @@ const WorkoutTimer = ({
       resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
       setIsRunning(false);
       setDisplayTimer(true);
-    } else {
-      return;
     }
   };
 
@@ -55,8 +61,7 @@ const WorkoutTimer = ({
       setCurrentExerciseIndex(0);
       setTimeRemaining(0);
       setWorkoutEnded(false);
-    } else {
-      return;
+      setIsPreWorkout(true);
     }
   };
 
@@ -213,8 +218,17 @@ const WorkoutTimer = ({
                       </div>
                     </div>
                     <div className="timer-text">
-                      <h1>{currentExercise?.name}</h1>
-                      {nextExercise && <h2>Next: {nextExercise.name}</h2>}
+                      {isPreWorkout ? (
+                        <>
+                          <h1>Get Ready</h1>
+                          <h2>Next: {workoutPlan[0]?.name}</h2>
+                        </>
+                      ) : (
+                        <>
+                          <h1>{currentExercise?.name}</h1>
+                          <h2>Next: {nextExercise?.name}</h2>
+                        </>
+                      )}
                     </div>
                   </div>
                 )}
