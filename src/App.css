@@ -313,16 +313,6 @@ main {
     border-radius: 1rem;
   }
 
-  .input-container {
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .input-container > div {
-    position: sticky;
-  }
-
   .timer-container {
     height: 100%;
     align-items: start;
@@ -372,6 +362,9 @@ main {
 }
 
 .input-container {
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
   position: sticky;
 }
