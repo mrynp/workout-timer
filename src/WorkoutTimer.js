@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import beepSound from "./assets/sounds/beep.mp3";
+import longBeep from "./assets/sounds/longbeep.mp3";
 
 const WorkoutTimer = ({
   workoutPlan,
@@ -18,6 +19,7 @@ const WorkoutTimer = ({
   const resetBtn = document.querySelector(".reset-btn");
 
   const beep = new Audio(beepSound);
+  const transitionBeep = new Audio(longBeep);
 
   const circumference = 785.71;
 
@@ -26,6 +28,7 @@ const WorkoutTimer = ({
       if (isPreWorkout) {
         beep.play();
         setTimeRemaining(5);
+        setCurrentExerciseIndex(0);
         setTimeout(() => {
           setIsPreWorkout(false);
           setTimeRemaining(workoutPlan[0].time);
@@ -70,6 +73,13 @@ const WorkoutTimer = ({
       timer = setInterval(() => {
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
+      if (
+        !isPreWorkout &&
+        timeRemaining === 3 &&
+        currentExerciseIndex < workoutPlan.length - 1
+      ) {
+        transitionBeep.play();
+      }
     } else if (timeRemaining === 0 && isRunning) {
       if (currentExerciseIndex < workoutPlan.length - 1) {
         setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
