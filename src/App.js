@@ -3,7 +3,7 @@ import WorkoutInput from "./WorkoutInput";
 import WorkoutList from "./WorkoutList";
 import WorkoutTimer from "./WorkoutTimer";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import texture from "./assets/texture.png";
 
 function App() {
@@ -12,6 +12,17 @@ function App() {
   const [exerciseTime, setExerciseTime] = useState("");
   const [draggedItemIndex, setDraggedItemIndex] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
+
+  useEffect(() => {
+    const savedWorkoutPlan = localStorage.getItem("workoutPlan");
+    if (savedWorkoutPlan) {
+      setWorkoutPlan(JSON.parse(savedWorkoutPlan));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("workoutPlan", JSON.stringify(workoutPlan));
+  }, [workoutPlan]);
 
   const addExerciseToWorkout = (exercise) => {
     setWorkoutPlan((prevPlan) => [...prevPlan, exercise]);
