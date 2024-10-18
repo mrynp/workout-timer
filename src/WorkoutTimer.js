@@ -23,6 +23,15 @@ const WorkoutTimer = ({
 
   const circumference = 785.71;
 
+  const speak = (text) => {
+    if ("speechSynthesis" in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance);
+    } else {
+      console.error("Text-to-speech not supported in this browser.");
+    }
+  };
+
   const startWorkout = () => {
     if (workoutPlan.length > 0) {
       if (isPreWorkout) {
@@ -74,6 +83,12 @@ const WorkoutTimer = ({
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
       if (
+        !isPreWorkout &&
+        timeRemaining === 6 &&
+        currentExerciseIndex < workoutPlan.length - 1
+      ) {
+        speak(`Next: ${nextExercise.name}`);
+      } else if (
         !isPreWorkout &&
         timeRemaining === 3 &&
         currentExerciseIndex < workoutPlan.length - 1
