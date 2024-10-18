@@ -82,7 +82,7 @@ const WorkoutTimer = ({
       timer = setInterval(() => {
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
-      if (isPreWorkout && timeRemaining == 4) {
+      if (isPreWorkout && timeRemaining === 4) {
         speak(`First workout: ${currentExercise.name}`);
       }
       if (
