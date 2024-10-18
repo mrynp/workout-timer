@@ -82,6 +82,9 @@ const WorkoutTimer = ({
       timer = setInterval(() => {
         setTimeRemaining((prevTime) => prevTime - 1);
       }, 1000);
+      if (isPreWorkout && timeRemaining == 4) {
+        speak(`First workout: ${currentExercise.name}`);
+      }
       if (
         !isPreWorkout &&
         timeRemaining === 6 &&
@@ -102,6 +105,7 @@ const WorkoutTimer = ({
       } else {
         beep.play();
         setTimeout(() => {
+          speak("Workout complete");
           setIsRunning(false);
           setIsPreWorkout(true);
           setDisplayTimer(false);
