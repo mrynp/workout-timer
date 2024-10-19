@@ -131,6 +131,7 @@ function App() {
                           handleDrop={handleDrop}
                           handleDuplicate={handleDuplicate}
                           workoutPlan={workoutPlan}
+                          isRunning={isRunning}
                         />
                       </div>
                     </div>

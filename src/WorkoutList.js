@@ -7,6 +7,7 @@ const WorkoutList = ({
   handleDrag,
   handleDrop,
   handleDuplicate,
+  isRunning,
 }) => {
   const secondsToMinutes = (time) => {
     const minutes = `${Math.floor(time / 60)}`.padStart(2, "0");
@@ -28,10 +29,11 @@ const WorkoutList = ({
             <li
               className="workout-item"
               key={workoutIndex}
-              draggable
+              draggable={!isRunning}
               onDragStart={() => handleDrag(workoutIndex)}
               onDragOver={(e) => e.preventDefault()}
               onDrop={() => handleDrop(workoutIndex)}
+              disabled={isRunning}
             >
               <div>
                 <div className="workout-name">{workout.name}</div>
@@ -44,6 +46,7 @@ const WorkoutList = ({
                       onClick={() => {
                         handleDuplicate(workoutIndex);
                       }}
+                      disabled={isRunning}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -59,6 +62,7 @@ const WorkoutList = ({
                       onClick={() => {
                         handleEdit(workoutIndex);
                       }}
+                      disabled={isRunning}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -74,6 +78,7 @@ const WorkoutList = ({
                       onClick={() => {
                         handleDelete(workoutIndex);
                       }}
+                      disabled={isRunning}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
