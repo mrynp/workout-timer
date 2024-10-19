@@ -22,7 +22,10 @@ const WorkoutInput = ({
       if (isEditing) {
         editExercise(name, time);
       } else {
-        addExercise(name, time);
+        addExercise({
+          name: name,
+          time: time,
+        });
       }
 
       setExerciseName("");
