@@ -12,6 +12,7 @@ function App() {
   const [exerciseTime, setExerciseTime] = useState("");
   const [draggedItemIndex, setDraggedItemIndex] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null);
 
   useEffect(() => {
     const savedWorkoutPlan = localStorage.getItem("workoutPlan");
@@ -24,7 +25,7 @@ function App() {
     localStorage.setItem("workoutPlan", JSON.stringify(workoutPlan));
   }, [workoutPlan]);
 
-  const addExerciseToWorkout = (exercise) => {
+  const addExercise = (exercise) => {
     setWorkoutPlan((prevPlan) => [...prevPlan, exercise]);
   };
 
@@ -40,7 +41,18 @@ function App() {
     const editExerciseTime = workoutPlan[index].time;
     setExerciseName(editExerciseName);
     setExerciseTime(editExerciseTime);
-    handleDelete(index);
+    setEditingIndex(index);
+  };
+
+  const editExercise = (name, time) => {
+    const updatedWorkoutPlan = workoutPlan.map((workoutPlan, workoutIndex) => {
+      if (workoutIndex === editingIndex) {
+        return { name, time };
+      }
+      return workoutPlan;
+    });
+    setWorkoutPlan(updatedWorkoutPlan);
+    setEditingIndex(null);
   };
 
   const handleDrag = (index) => {
@@ -108,7 +120,9 @@ function App() {
                           setExerciseName={setExerciseName}
                           exerciseTime={exerciseTime}
                           setExerciseTime={setExerciseTime}
-                          onAddExercise={addExerciseToWorkout}
+                          addExercise={addExercise}
+                          editExercise={editExercise}
+                          isEditing={editingIndex !== null}
                         />
                         <WorkoutList
                           handleEdit={handleEdit}

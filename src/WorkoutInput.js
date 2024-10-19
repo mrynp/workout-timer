@@ -1,7 +1,9 @@
 import React from "react";
 
 const WorkoutInput = ({
-  onAddExercise,
+  addExercise,
+  editExercise,
+  isEditing,
   isRunning,
   exerciseName,
   setExerciseName,
@@ -14,10 +16,15 @@ const WorkoutInput = ({
 
   const handleAddExercise = () => {
     if (exerciseName && exerciseTime) {
-      onAddExercise({
-        name: capitalizeFirstLetter(exerciseName),
-        time: parseInt(exerciseTime),
-      });
+      const name = capitalizeFirstLetter(exerciseName);
+      const time = parseInt(exerciseTime);
+
+      if (isEditing) {
+        editExercise(name, time);
+      } else {
+        addExercise(name, time);
+      }
+
       setExerciseName("");
       setExerciseTime("");
     }
