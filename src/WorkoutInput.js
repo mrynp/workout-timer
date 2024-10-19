@@ -51,7 +51,11 @@ const WorkoutInput = ({
             placeholder="Time (s)"
             disabled={isRunning}
           />
-          <button onClick={handleAddExercise} disabled={isRunning}>
+          <button
+            onClick={handleAddExercise}
+            disabled={isRunning}
+            style={{ cursor: isRunning ? "default" : "pointer" }}
+          >
             Add
             <svg
               xmlns="http://www.w3.org/2000/svg"

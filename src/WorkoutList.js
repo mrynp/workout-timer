@@ -34,6 +34,7 @@ const WorkoutList = ({
               onDragOver={(e) => e.preventDefault()}
               onDrop={() => handleDrop(workoutIndex)}
               disabled={isRunning}
+              style={{ cursor: isRunning ? "default" : "grab" }}
             >
               <div>
                 <div className="workout-name">{workout.name}</div>
@@ -47,6 +48,7 @@ const WorkoutList = ({
                         handleDuplicate(workoutIndex);
                       }}
                       disabled={isRunning}
+                      style={{ cursor: isRunning ? "default" : "pointer" }}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -63,6 +65,7 @@ const WorkoutList = ({
                         handleEdit(workoutIndex);
                       }}
                       disabled={isRunning}
+                      style={{ cursor: isRunning ? "default" : "pointer" }}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -79,6 +82,7 @@ const WorkoutList = ({
                         handleDelete(workoutIndex);
                       }}
                       disabled={isRunning}
+                      style={{ cursor: isRunning ? "default" : "pointer" }}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
