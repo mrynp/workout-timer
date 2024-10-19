@@ -41,7 +41,9 @@ const WorkoutTimer = ({
   const startWorkout = () => {
     if (workoutPlan.length > 0) {
       if (isPreWorkout) {
-        beep.play();
+        beep.current.play().catch((error) => {
+          console.error("Failed to play beep sound:", error);
+        });
         setTimeRemaining(5);
         setCurrentExerciseIndex(0);
         setTimeout(() => {
@@ -52,7 +54,7 @@ const WorkoutTimer = ({
       setIsRunning(true);
       setDisplayTimer(true);
       setWorkoutEnded(false);
-      startBtn.style.fill = "rgba(254, 243, 200, 0.9)";
+      startBtn.current.style.fill = "rgba(254, 243, 200, 0.9)";
       pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
       resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
     }
@@ -60,7 +62,7 @@ const WorkoutTimer = ({
 
   const pauseWorkout = () => {
     if (isRunning) {
-      startBtn.style.fill = "rgba(255, 255, 255, 0.4";
+      startBtn.current.style.fill = "rgba(255, 255, 255, 0.4";
       pauseBtn.style.fill = "rgba(254, 243, 200, 0.9)";
       resetBtn.style.fill = "rgba(255, 255, 255, 0.4";
       setIsRunning(false);
@@ -71,7 +73,7 @@ const WorkoutTimer = ({
   const resetTimer = () => {
     if (workoutPlan.length > 0) {
       resetBtn.style.fill = "rgba(254, 243, 200, 0.9)";
-      startBtn.style.fill = "rgba(255, 255, 255, 0.4";
+      startBtn.current.style.fill = "rgba(255, 255, 255, 0.4";
       pauseBtn.style.fill = "rgba(255, 255, 255, 0.4";
       setIsRunning(false);
       setDisplayTimer(false);
@@ -102,20 +104,24 @@ const WorkoutTimer = ({
         timeRemaining === 3 &&
         currentExerciseIndex < workoutPlan.length - 1
       ) {
-        transitionBeep.play();
+        transitionBeep.current.play().catch((error) => {
+          console.error("Failed to play beep sound:", error);
+        });
       }
     } else if (timeRemaining === 0 && isRunning) {
       if (currentExerciseIndex < workoutPlan.length - 1) {
         setCurrentExerciseIndex((prevIndex) => prevIndex + 1);
         setTimeRemaining(workoutPlan[currentExerciseIndex + 1].time);
       } else {
-        beep.play();
+        beep.current.play().catch((error) => {
+          console.error("Failed to play beep sound:", error);
+        });
         setTimeout(() => {
           speak("Workout complete");
           setIsRunning(false);
           setIsPreWorkout(true);
           setDisplayTimer(false);
-          startBtn.style.fill = "rgba(255, 255, 255, 0.4";
+          startBtn.current.style.fill = "rgba(255, 255, 255, 0.4";
           setWorkoutEnded(true);
         }, 2000);
       }
@@ -162,6 +168,7 @@ const WorkoutTimer = ({
             <div className="btn-padding">
               <button className="custom-btn" onClick={startWorkout}>
                 <svg
+                  ref={startBtn}
                   className="start-btn"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
