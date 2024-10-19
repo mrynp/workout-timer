@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import beepSound from "./assets/sounds/beep.mp3";
 import longBeep from "./assets/sounds/longbeep.mp3";
 
@@ -14,12 +14,18 @@ const WorkoutTimer = ({
   const [workoutEnded, setWorkoutEnded] = useState(false);
   const [isPreWorkout, setIsPreWorkout] = useState(true);
 
-  const startBtn = document.querySelector(".start-btn");
   const pauseBtn = document.querySelector(".pause-btn");
   const resetBtn = document.querySelector(".reset-btn");
 
-  const beep = new Audio(beepSound);
-  const transitionBeep = new Audio(longBeep);
+  const beep = useRef(new Audio(beepSound));
+  const transitionBeep = useRef(new Audio(longBeep));
+  const startBtn = useRef(null);
+
+  const currentExercise = workoutPlan[currentExerciseIndex];
+  const nextExercise =
+    currentExerciseIndex < workoutPlan.length - 1
+      ? workoutPlan[currentExerciseIndex + 1]
+      : null;
 
   const circumference = 785.71;
 
@@ -121,6 +127,9 @@ const WorkoutTimer = ({
     currentExerciseIndex,
     workoutPlan,
     setIsRunning,
+    isPreWorkout,
+    currentExercise?.name,
+    nextExercise?.name,
   ]);
 
   const calculateOffset = () => {
@@ -140,12 +149,6 @@ const WorkoutTimer = ({
     const seconds = `${time - minutes * 60}`.padStart(2, "0");
     return `${minutes}:${seconds}`;
   };
-
-  const currentExercise = workoutPlan[currentExerciseIndex];
-  const nextExercise =
-    currentExerciseIndex < workoutPlan.length - 1
-      ? workoutPlan[currentExerciseIndex + 1]
-      : null;
 
   return (
     <div className="left-container">
